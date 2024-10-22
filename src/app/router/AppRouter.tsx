@@ -1,17 +1,9 @@
-import { enableAllConsent } from "../store/consent/consentSlice";
-import { useAppDispatch } from "../store/hooks";
+import { useKeycloak } from "@react-keycloak/web";
 
 export const AppRouter = () => {
-  const dispatch = useAppDispatch();
-  return (
-    <div>
-      <button
-        onClick={() => {
-          dispatch(enableAllConsent());
-        }}
-      >
-        1
-      </button>
-    </div>
-  );
+  const { keycloak } = useKeycloak();
+
+  const isLoggedIn = keycloak.authenticated;
+
+  return isLoggedIn ? <>123</> : <>256</>;
 };
