@@ -4,12 +4,17 @@ import { store } from "./store/store";
 import { ConfigProvider } from "antd";
 import { BrowserRouter } from "react-router-dom";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import keycloak from "./keycloak";
+import { keycloak } from "./keycloak";
 
 const App = () => {
   return (
     <Provider store={store}>
-      <ReactKeycloakProvider authClient={keycloak}>
+      <ReactKeycloakProvider
+        authClient={keycloak}
+        initOptions={{
+          onLoad: "login-required",
+        }}
+      >
         <ConfigProvider>
           <BrowserRouter basename="/">
             <AppRouter />
