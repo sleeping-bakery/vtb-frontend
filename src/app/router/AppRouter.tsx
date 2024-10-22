@@ -2,8 +2,7 @@ import { useKeycloak } from "@react-keycloak/web";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
-
   const isLoggedIn = keycloak.authenticated;
 
-  return isLoggedIn ? <>123</> : <>256</>;
+  return isLoggedIn && <></>;
 };
