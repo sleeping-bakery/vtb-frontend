@@ -6,3 +6,7 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+
+body {
+  background: #e1e5e8;
+}
