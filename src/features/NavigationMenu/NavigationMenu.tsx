@@ -11,8 +11,6 @@ import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import { Settings } from "../Settings/Settings";
-import { useAppSelector } from "../../app/store/hooks";
-import { selectLogin } from "../../app/store/user/userSlice";
 import { Button, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -38,7 +36,6 @@ const items: MenuProps["items"] = [
 
 export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const user = useAppSelector(selectLogin);
 
   const showModal = () => setIsModalOpen(true);
   const handleOk = () => setIsModalOpen(false);
