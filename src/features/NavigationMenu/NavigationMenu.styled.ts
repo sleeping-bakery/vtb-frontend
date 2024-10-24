@@ -43,7 +43,46 @@ export const ImageButton = styled(Button)`
   }
 
   svg {
-    fill: ${COLORS.PRIMARY_BLUE};
+    fill: ${COLORS.TEXT_MAIN};
     align-self: center;
   }
+
+  :hover {
+    svg {
+      fill: ${COLORS.PRIMARY_BLUE};
+    }
+  }
+
+  transition: 0.15s;
+`;
+
+export const NavigationMenuSubBlock = styled("div")`
+  display: flex;
+`;
+
+export const ExitButton = styled(Button)`
+  margin-left: 10px;
+
+  .ant-btn-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    fill: ${COLORS.TEXT_MAIN};
+    align-self: center;
+  }
+
+  :hover {
+    svg {
+      fill: ${COLORS.PRIMARY_BLUE};
+    }
+  }
+
+  transition: 0.15s;
+`;
+
+export const MenuDropdown = styled("div")`
+  margin-left: 50px;
 `;
