@@ -9,38 +9,38 @@ export const COLORS = {
 
 export const USER_SETTINGS_CONSENTS = [
   {
-    id: UserSettingsConsents.ReadAccountsBasic,
-    name: UserSettingsConsentsNames.ReadAccountsBasic,
+    id: UserSettingsConsents.readAccountsBasic,
+    name: UserSettingsConsentsNames.readAccountsBasic,
     idToRequest: 1,
   },
   {
-    id: UserSettingsConsents.ReadAccountsDetail,
-    name: UserSettingsConsentsNames.ReadAccountsDetail,
+    id: UserSettingsConsents.readAccountsDetail,
+    name: UserSettingsConsentsNames.readAccountsDetail,
     idToRequest: 2,
   },
   {
-    id: UserSettingsConsents.ReadBalances,
-    name: UserSettingsConsentsNames.ReadBalances,
+    id: UserSettingsConsents.readBalances,
+    name: UserSettingsConsentsNames.readBalances,
     idToRequest: 3,
   },
   {
-    id: UserSettingsConsents.ReadTransactionsBasic,
-    name: UserSettingsConsentsNames.ReadTransactionsBasic,
+    id: UserSettingsConsents.readTransactionsBasic,
+    name: UserSettingsConsentsNames.readTransactionsBasic,
     idToRequest: 4,
   },
   {
-    id: UserSettingsConsents.ReadTransactionsCredits,
-    name: UserSettingsConsentsNames.ReadTransactionsCredits,
+    id: UserSettingsConsents.readTransactionsCredits,
+    name: UserSettingsConsentsNames.readTransactionsCredits,
     idToRequest: 5,
   },
   {
-    id: UserSettingsConsents.ReadTransactionsDebits,
-    name: UserSettingsConsentsNames.ReadTransactionsDebits,
+    id: UserSettingsConsents.readTransactionsDebits,
+    name: UserSettingsConsentsNames.readTransactionsDebits,
     idToRequest: 6,
   },
   {
-    id: UserSettingsConsents.ReadTransactionsDetail,
-    name: UserSettingsConsentsNames.ReadTransactionsDetail,
+    id: UserSettingsConsents.readTransactionsDetail,
+    name: UserSettingsConsentsNames.readTransactionsDetail,
     idToRequest: 7,
   },
 ];

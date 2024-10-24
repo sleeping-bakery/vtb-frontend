@@ -33,9 +33,8 @@ export const AppRouter = () => {
         user.accountConsents.forEach((item) => {
           dispatch(
             changeConsent({
-              key: String(Object.keys(UserSettingsConsents)[item - 1]).replace(
-                "R",
-                "r"
+              key: String(
+                Object.keys(UserSettingsConsents)[item - 1]
               ) as keyof IConsentSlice,
               value: true,
             })
@@ -49,7 +48,7 @@ export const AppRouter = () => {
         handleSaveUser
       );
     }
-  }, [keycloak.token]);
+  }, [keycloak.token, dispatch]);
 
   return (
     isLoggedIn && (
