@@ -9,6 +9,7 @@ import { setUserId, setUserLogin, setUserToken } from "../store/user/userSlice";
 import { IConsentSlice, IUserResponse } from "../../shared/consts/types";
 import { UserSettingsConsents } from "../../shared/consts/enums";
 import { changeConsent } from "../store/consent/consentSlice";
+import { Accounts } from "../../features/Accounts/Accounts";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -18,8 +19,12 @@ export const AppRouter = () => {
 
   const routes = [
     {
-      path: "/settings",
-      element: <>123</>,
+      path: "/accounts",
+      element: <Accounts />,
+    },
+    {
+      path: "*",
+      element: <Accounts />,
     },
   ];
 
