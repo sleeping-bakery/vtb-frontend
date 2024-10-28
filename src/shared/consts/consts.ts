@@ -44,3 +44,12 @@ export const USER_SETTINGS_CONSENTS = [
     idToRequest: 7,
   },
 ];
+
+export const ACCOUNTS_TYPES: Record<number, string> = {
+  1: "Кредитный счёт",
+  2: "Дебетовый счёт",
+  3: "Счёт",
+  4: "Ипотечный cчёт",
+  5: "Счёт",
+  6: "Сберегательный счёт",
+};

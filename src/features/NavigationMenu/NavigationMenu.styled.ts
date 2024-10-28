@@ -8,7 +8,7 @@ export const NavigationBlock = styled("div")`
 
   margin-top: 10px;
 
-  height: 40px;
+  height: 70px;
   border-radius: 8px;
 
   display: flex;
@@ -16,13 +16,14 @@ export const NavigationBlock = styled("div")`
   position: relative;
   justify-content: space-between;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 30px;
 `;
 
 export const ImageLogo = styled("img")`
   position: absolute;
-  top: 0;
-  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30px;
 
   height: 40px;
   width: 40px;
@@ -84,5 +85,5 @@ export const ExitButton = styled(Button)`
 `;
 
 export const MenuDropdown = styled("div")`
-  margin-left: 50px;
+  margin-left: 70px;
 `;
