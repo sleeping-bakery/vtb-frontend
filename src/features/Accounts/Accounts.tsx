@@ -15,7 +15,6 @@ export const Accounts = () => {
   const token = useAppSelector(selectToken);
   const dispatch = useAppDispatch();
   const accountsData = useAppSelector(selectAccountsData);
-  const [isModalOpen, setOpenModal] = useState(false);
 
   useEffect(() => {
     const handlerAccounts = (data: any) => {
@@ -46,20 +45,12 @@ export const Accounts = () => {
     }
   }, [token, dispatch]);
 
-  const handleModalOpen = () => {
-    setOpenModal(true);
-  };
-
   return (
     <AccountsPage>
       <AccountsContent>
         <PageTitle>Счета пользователя</PageTitle>
-        <AccountsCollapse
-          collapseData={accountsData}
-          handleModalOpen={handleModalOpen}
-        />
+        <AccountsCollapse collapseData={accountsData} />
       </AccountsContent>
-      <AccountsModal isOpen={isModalOpen} />
     </AccountsPage>
   );
 };

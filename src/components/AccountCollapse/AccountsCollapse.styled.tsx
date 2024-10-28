@@ -8,6 +8,7 @@ export const LabelField = styled("div")`
   svg {
     margin-right: 16px;
     align-self: center;
+    fill: #1677ff;
   }
 `;
 

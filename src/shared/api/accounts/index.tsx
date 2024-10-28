@@ -20,3 +20,28 @@ export const getCards = async (
 
   successHandler(cards);
 };
+
+export const getStatement = async (
+  baseUrl: string,
+  token: string,
+  accountId: string,
+  successHandler: (statement: any) => void
+) => {
+  const statement = await baseGet(baseUrl + "/Statement/" + accountId, token);
+
+  successHandler(statement);
+};
+
+export const getTransaction = async (
+  baseUrl: string,
+  token: string,
+  accountId: string,
+  successHandler: (transaction: any) => void
+) => {
+  const transaction = await baseGet(
+    baseUrl + "/Transaction/" + accountId,
+    token
+  );
+
+  successHandler(transaction);
+};

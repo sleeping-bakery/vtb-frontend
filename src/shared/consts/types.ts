@@ -105,11 +105,188 @@ export interface MappedAccounts {
   account: Account;
 }
 
-export interface IAccountSlice {
-  accountsData: MappedAccounts[];
-}
-
 export interface AccountsCollapseProps {
   collapseData: MappedAccounts[];
-  handleModalOpen: () => void;
+}
+
+interface CurrencyExchange {
+  exchangeRate: number;
+  sourceCurrency: string;
+  targetCurrency: string;
+  unitCurrency: string;
+  contractIdentification: string;
+  quotationDate: string;
+  instructedAmount: Amount;
+}
+
+interface BankTransactionCode {
+  code: string;
+  subCode: string;
+}
+
+interface ProprietaryBankTransactionCode {
+  code: string;
+  issuer: string;
+}
+
+interface TBalance {
+  creditDebitIndicator: number;
+  type: number;
+  amount: Amount;
+}
+
+interface MerchantDetails {
+  merchantName: string;
+  merchantCategoryCode: string;
+}
+
+interface Address {
+  addressType: number;
+  department: string;
+  subDepartment: string;
+  streetName: string;
+  buildingNumber: string;
+  postCode: string;
+  townName: string;
+  countrySubDivision: string;
+  country: string;
+  addressLine: string[];
+}
+
+interface CreditorAgent {
+  schemeName: number;
+  identification: string;
+  name: string;
+  address: Address;
+}
+
+interface CreditorAccount {
+  schemeName: number;
+  identification: string;
+  name: string;
+}
+
+interface DebtorAgent {
+  schemeName: number;
+  identification: string;
+  name: string;
+  address: Address;
+}
+
+interface DebtorAccount {
+  schemeName: number;
+  identification: string;
+  name: string;
+}
+
+interface CardInstrument {
+  cardSchemeName: number;
+  authorisationType: number;
+  name: string;
+  identification: string;
+}
+
+export interface Transaction {
+  creditDebitIndicator: number;
+  status: number;
+  accountId: string;
+  transactionId: string;
+  transactionReference: string;
+  bookingDateTime: string;
+  valueDateTime: string;
+  transactionInformation: string;
+  addressLine: string;
+  amount: Amount;
+  chargeAmount: Amount;
+  currencyExchange: CurrencyExchange;
+  bankTransactionCode: BankTransactionCode;
+  proprietaryBankTransactionCode: ProprietaryBankTransactionCode;
+  balance: TBalance;
+  merchantDetails: MerchantDetails;
+  creditorAgent: CreditorAgent;
+  creditorAccount: CreditorAccount;
+  debtorAgent: DebtorAgent;
+  debtorAccount: DebtorAccount;
+  cardInstrument: CardInstrument;
+}
+
+interface Address {
+  addressType: number;
+  department: string;
+  subDepartment: string;
+  streetName: string;
+  buildingNumber: string;
+  postCode: string;
+  townName: string;
+  countrySubDivision: string;
+  country: string;
+  addressLine: string[];
+}
+
+interface DebtorParty {
+  inn: string;
+  name: string;
+  kpp: string;
+}
+
+interface DebtorAccount {
+  schemeName: number;
+  identification: string;
+}
+
+interface DebtorAgent {
+  schemeName: number;
+  identification: string;
+  name: string;
+  address: Address;
+}
+
+interface CreditorParty {
+  inn: string;
+  name: string;
+  kpp: string;
+}
+
+interface CreditorAccount {
+  schemeName: number;
+  identification: string;
+}
+
+interface CreditorAgent {
+  schemeName: number;
+  identification: string;
+  name: string;
+  address: Address;
+}
+
+interface TransactionStatement {
+  creditDebitIndicator: number;
+  status: number;
+  transactionId: string;
+  documentNumber: string;
+  bookingDateTime: string;
+  valueDateTime: string;
+  description: string;
+  amount: Amount;
+  debtorParty: DebtorParty;
+  debtorAccount: DebtorAccount;
+  debtorAgent: DebtorAgent;
+  creditorParty: CreditorParty;
+  creditorAccount: CreditorAccount;
+  creditorAgent: CreditorAgent;
+}
+
+export interface Statement {
+  accountId: string;
+  statementId: string;
+  fromBookingDateTime: string;
+  toBookingDateTime: string;
+  creationDateTime: string;
+  transaction: TransactionStatement[];
+}
+
+export interface IAccountSlice {
+  accountsData: MappedAccounts[];
+  transaction: Transaction[];
+  statement: Statement[];
 }
