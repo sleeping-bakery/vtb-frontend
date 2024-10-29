@@ -10,6 +10,7 @@ import { IConsentSlice, IUserResponse } from "../../shared/consts/types";
 import { UserSettingsConsents } from "../../shared/consts/enums";
 import { changeConsent } from "../store/consent/consentSlice";
 import { Accounts } from "../../features/Accounts/Accounts";
+import { PeriodPayment } from "../../features/PeriodPayment/PeriodPayment";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -18,6 +19,10 @@ export const AppRouter = () => {
   const isLoggedIn = keycloak.authenticated;
 
   const routes = [
+    {
+      path: "/period-payments",
+      element: <PeriodPayment />,
+    },
     {
       path: "/accounts",
       element: <Accounts />,

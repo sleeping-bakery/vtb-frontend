@@ -291,3 +291,157 @@ export interface IAccountSlice {
   transaction: Transaction[];
   statement: Statement[];
 }
+
+interface Period {
+  type: number;
+  year: string;
+  fromDate: string;
+  toDate: string;
+}
+
+interface TaxAmount {
+  rate: string;
+  totalAmount: string;
+}
+
+interface TaxRecord {
+  type: string;
+  category: string;
+  categoryDetails: string;
+  debtorStatus: string;
+  period: Period[];
+  taxAmount: TaxAmount;
+}
+
+interface CreditorTax {
+  taxType: string;
+  registrationIdentification: string;
+}
+
+interface DebtorTax {
+  taxType: string;
+  registrationIdentification: string;
+}
+
+interface TaxRemittance {
+  administrationZone: string;
+  referenceNumber: string;
+  date: string;
+  creditor: CreditorTax;
+  debtor: DebtorTax;
+  record: TaxRecord;
+}
+
+interface CreditorReferenceInformation {
+  type: string;
+  reference: string;
+}
+
+interface RemittanceInformation {
+  unstructured: string;
+  creditorReferenceInformation: CreditorReferenceInformation;
+  taxRemittance: TaxRemittance;
+}
+
+interface Identification {
+  schemeName: number;
+  identification: string;
+}
+
+interface PostalAddress {
+  addressType: number;
+  addressLine: string[];
+  streetName: string;
+  buildingNumber: string;
+  postCode: string;
+  townName: string;
+  countrySubDivision: string;
+  country: string;
+}
+
+interface Creditor {
+  name: string;
+  mobileNumber: string;
+  countryOfResidence: string;
+  countryOfBirth: string;
+  provinceOfBirth: string;
+  cityOfBirth: string;
+  birthDate: string;
+  identification: Identification[];
+  postalAddress: PostalAddress;
+}
+
+interface DebtorAccount {
+  schemeName: number;
+  name: string;
+  identification: string;
+}
+
+interface CreditorAgent {
+  schemeName: number;
+  identification: string;
+}
+
+interface CreditorAccount {
+  schemeName: number;
+  name: string;
+  identification: string;
+}
+
+interface ControlParameters {
+  validFromDateTime: string;
+  validToDateTime: string;
+  maximumIndividualAmount: Amount;
+  periodicLimits: string[];
+  vrpType: string[];
+  psuAuthenticationMethods: string[];
+  supplementaryData: string;
+}
+
+interface Initiation {
+  debtorAccount: DebtorAccount;
+  creditorAgent: CreditorAgent;
+  creditorAccount: CreditorAccount;
+  creditorAgentAccount: CreditorAccount;
+  creditor: Creditor;
+  remittanceInformation: RemittanceInformation;
+}
+
+interface Data {
+  readRefundAccount: number;
+  status: number;
+  consentId: string;
+  creationDateTime: string;
+  statusUpdateDateTime: string;
+  controlParameters: ControlParameters;
+  initiation: Initiation;
+  debtorAccount: DebtorAccount;
+}
+
+interface DeliveryAddress {
+  addressType: number;
+  addressLine: string[];
+  streetName: string;
+  buildingNumber: string;
+  postCode: string;
+  townName: string;
+  countrySubDivision: string;
+  country: string;
+}
+
+interface Risk {
+  paymentContextCode: number;
+  merchantCategoryCode: string;
+  merchantCustomerIdentification: string;
+  deliveryAddress: DeliveryAddress[];
+}
+
+interface ConsentBanking {
+  data: Data;
+  risk: Risk;
+}
+
+export interface CardConsent {
+  cardId: string;
+  consentBanking: ConsentBanking;
+}

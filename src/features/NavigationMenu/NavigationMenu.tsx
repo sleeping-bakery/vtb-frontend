@@ -22,15 +22,11 @@ interface INavigationMenu {
 const items: MenuProps["items"] = [
   {
     key: "1_navigation",
-    label: <Link to="#">Счета</Link>,
+    label: <Link to="accounts">Счета</Link>,
   },
   {
     key: "2_navigation",
-    label: <Link to="#">Кредиты</Link>,
-  },
-  {
-    key: "3_navigation",
-    label: <Link to="#">Ипотеки</Link>,
+    label: <Link to="period-payments">Периодические платежи</Link>,
   },
 ];
 

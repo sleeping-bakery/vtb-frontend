@@ -11,6 +11,16 @@ export const getAccounts = async (
   successHandler({ accounts, balances });
 };
 
+export const getAccount = async (
+  baseUrl: string,
+  token: string,
+  id: string
+) => {
+  const accounts = await baseGet(baseUrl + "/Account/" + id, token);
+
+  return accounts.data;
+};
+
 export const getCards = async (
   baseUrl: string,
   token: string,

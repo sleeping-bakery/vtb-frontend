@@ -59,3 +59,23 @@ export const CARD_STATUSES: Record<number, string> = {
   2: "Активна",
   3: "Перманентно заблокирована. Нельзя обновить",
 };
+
+export const IDENTIFICATION_TYPE: Record<number, string> = {
+  1: "Номер карты",
+  2: "Номер телефона",
+  3: "Номер счета",
+};
+
+export const PERIOD_TYPE: Record<number, string> = {
+  1: "День",
+  2: "Неделя",
+  3: "Две недели",
+  4: "Месяц",
+  5: "Полгода",
+  6: "Год",
+};
+
+export const ALIGNMENT_TYPE: Record<number, string> = {
+  1: "С даты согласия",
+  2: "С начала календарного месяца, когда было дано согласие"
+}
