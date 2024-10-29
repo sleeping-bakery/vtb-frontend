@@ -107,6 +107,7 @@ export interface MappedAccounts {
 
 export interface AccountsCollapseProps {
   collapseData: MappedAccounts[];
+  cards: any[];
 }
 
 interface CurrencyExchange {

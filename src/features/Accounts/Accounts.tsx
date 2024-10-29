@@ -9,12 +9,12 @@ import {
   setAccountsData,
 } from "../../app/store/account/accountSlice";
 import { AccountsCollapse } from "../../components/AccountCollapse/AccountsCollapse";
-import { AccountsModal } from "../../components/AccountsModal/AccountsModal";
 
 export const Accounts = () => {
   const token = useAppSelector(selectToken);
   const dispatch = useAppDispatch();
   const accountsData = useAppSelector(selectAccountsData);
+  const [cards, setCards] = useState<any[]>([]);
 
   useEffect(() => {
     const handlerAccounts = (data: any) => {
@@ -36,7 +36,7 @@ export const Accounts = () => {
     };
 
     const handlerCards = (data: any) => {
-      console.log(data);
+      setCards(data);
     };
 
     if (process.env.REACT_APP_BACKEND_URL && token) {
@@ -49,7 +49,7 @@ export const Accounts = () => {
     <AccountsPage>
       <AccountsContent>
         <PageTitle>Счета пользователя</PageTitle>
-        <AccountsCollapse collapseData={accountsData} />
+        <AccountsCollapse cards={cards} collapseData={accountsData} />
       </AccountsContent>
     </AccountsPage>
   );

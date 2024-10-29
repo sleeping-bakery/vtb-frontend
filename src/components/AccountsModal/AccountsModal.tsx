@@ -122,23 +122,25 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
               История
             </h2>
           </TextSwitchButton>
-          <TextSwitchButton
-            onClick={() => {
-              setActiveMenu(EActiveMenu.statement);
-            }}
-          >
-            <h2
-              style={
-                activeMenu === EActiveMenu.statement
-                  ? {
-                      color: COLORS.PRIMARY_BLUE,
-                    }
-                  : {}
-              }
+          {statement.length !== 0 && (
+            <TextSwitchButton
+              onClick={() => {
+                setActiveMenu(EActiveMenu.statement);
+              }}
             >
-              Выписка
-            </h2>
-          </TextSwitchButton>
+              <h2
+                style={
+                  activeMenu === EActiveMenu.statement
+                    ? {
+                        color: COLORS.PRIMARY_BLUE,
+                      }
+                    : {}
+                }
+              >
+                Выписка
+              </h2>
+            </TextSwitchButton>
+          )}
         </TextSwitchBlock>
         {activeMenu === EActiveMenu.transaction ? (
           <Transaction data={transaction} />
