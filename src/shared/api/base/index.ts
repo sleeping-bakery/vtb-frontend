@@ -7,15 +7,19 @@ export const baseGet = async (url: string, token: string) => {
         Authorization: "Bearer " + token,
       },
     });
-    
+
     return response.data;
   } catch (e) {}
 };
 
-export const basePost = (url: string, body: any, successFunction: any) => {
-  const response = axios.post(url, body);
-
-  successFunction(response);
+export const basePost = async (url: string, token: string, body?: any) => {
+  try {
+    await axios.post(url, body, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+  } catch (e) {}
 };
 
 export const basePut = async (url: string, token: string, body: any) => {

@@ -53,3 +53,9 @@ export const ACCOUNTS_TYPES: Record<number, string> = {
   5: "Счёт",
   6: "Сберегательный счёт",
 };
+
+export const CARD_STATUSES: Record<number, string> = {
+  1: "Заблокирована",
+  2: "Активна",
+  3: "Перманентно заблокирована. Нельзя обновить",
+};
