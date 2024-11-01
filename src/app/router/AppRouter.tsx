@@ -11,6 +11,7 @@ import { UserSettingsConsents } from "../../shared/consts/enums";
 import { changeConsent } from "../store/consent/consentSlice";
 import { Accounts } from "../../features/Accounts/Accounts";
 import { PeriodPayment } from "../../features/PeriodPayment/PeriodPayment";
+import { UnidentifiedPayment } from "../../features/UnidentifiedPayment/UnidentifiedPayment";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -26,6 +27,10 @@ export const AppRouter = () => {
     {
       path: "/accounts",
       element: <Accounts />,
+    },
+    {
+      path: "/unidentified-payment",
+      element: <UnidentifiedPayment />,
     },
     {
       path: "*",

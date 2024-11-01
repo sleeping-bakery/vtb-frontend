@@ -168,9 +168,9 @@ export const PeriodPayment = () => {
               setMainData(updatedData);
             }}
           />
-          <p>Кредитор</p>
+          <p>Получатель</p>
           <Input
-            placeholder="Именование кредитора"
+            placeholder="Именование получателя"
             value={mainData.creditorName}
             onChange={(value) => {
               const updatedData = { ...mainData };
@@ -275,6 +275,21 @@ export const PeriodPayment = () => {
             }}
           >
             Создать
+          </Button>{" "}
+          <Button
+            onClick={async () => {
+              handleFormClose();
+              setItems([]);
+              setMainData({
+                amount: 0,
+                card: null,
+                creditorName: "",
+                creditorType: null,
+                paymentData: "",
+              });
+            }}
+          >
+            Закрыть
           </Button>
         </div>
       )}
@@ -288,7 +303,7 @@ export const PeriodPayment = () => {
           Название компании:{" "}
           {dataItem.consentBanking.data.initiation.creditor.name}
           <br />
-          Идентификатор перевода:{" "}
+          Идентификатор получателя:{" "}
           {dataItem.consentBanking.data.initiation.debtorAccount.identification}
           <br />
           Ограничение перевода:{" "}
@@ -321,7 +336,7 @@ export const PeriodPayment = () => {
                 await deletePeriodPayment(
                   process.env.REACT_APP_BACKEND_URL,
                   token,
-                  dataItem.consentBanking.data.consentId
+                  dataItem.id
                 );
               }
             }}

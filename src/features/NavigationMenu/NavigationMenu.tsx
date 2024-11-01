@@ -28,6 +28,10 @@ const items: MenuProps["items"] = [
     key: "2_navigation",
     label: <Link to="period-payments">Периодические платежи</Link>,
   },
+  {
+    key: "3_navigation",
+    label: <Link to="unidentified-payment">Неидентефицированный платеж</Link>,
+  },
 ];
 
 export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
