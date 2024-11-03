@@ -131,7 +131,6 @@ export const PeriodPayment = () => {
     }
   };
 
-  console.log(data);
   return (
     <PeriodPaymentField>
       <Button onClick={handleFormOpen}>Создание подписки</Button>
