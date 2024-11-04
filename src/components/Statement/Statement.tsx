@@ -7,7 +7,9 @@ import { Transaction } from "../Transaction/Transaction";
 export const Statement: React.FC<{
   data: IStatement[];
   transactionData: ITransaction[];
-}> = ({ data, transactionData }) => {
+  bonuses: any;
+  handleGetBonuses: any;
+}> = ({ data, transactionData, bonuses, handleGetBonuses }) => {
   return (
     <div>
       Дата создания {data[0].creationDateTime}
@@ -15,7 +17,11 @@ export const Statement: React.FC<{
       Бронирование с {data[0].fromBookingDateTime} по{" "}
       {data[0].toBookingDateTime}
       <br />
-      <Transaction data={transactionData} />
+      <Transaction
+        data={transactionData}
+        bonuses={bonuses}
+        handleGetBonuses={handleGetBonuses}
+      />
     </div>
   );
 };

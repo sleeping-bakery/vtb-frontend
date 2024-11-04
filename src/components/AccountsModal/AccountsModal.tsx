@@ -23,6 +23,7 @@ import {
 } from "../../app/store/account/accountSlice";
 import { Transaction } from "../Transaction/Transaction";
 import { Statement } from "../Statement/Statement";
+import { getBonuses } from "../../shared/api/bonus";
 
 interface AccountsModalProps {
   isOpen: boolean;
@@ -48,6 +49,23 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
   const transaction = useAppSelector(selectTransaction);
 
   const [activeMenu, setActiveMenu] = useState(EActiveMenu.transaction);
+
+  const [bonuses, setBonuses] = useState<any>();
+
+  const handleGetBonuses = () => {
+    if (process.env.REACT_APP_BACKEND_URL && token) {
+      const handleSaveBonuses = (data: any) => {
+        setBonuses(data.data.data);
+      };
+
+      getBonuses(
+        process.env.REACT_APP_BACKEND_URL,
+        token,
+        handleSaveBonuses,
+        data.account.accountId
+      );
+    }
+  };
 
   useEffect(() => {
     const handleSaveStatements = (statements: {
@@ -75,7 +93,10 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
         data.account.accountId,
         handleSaveTransactions
       );
+
+      handleGetBonuses && handleGetBonuses();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, dispatch, data]);
 
   const handleCancel = () => {
@@ -84,6 +105,7 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
     handleModalClose();
   };
 
+  console.log(bonuses);
   return (
     <AccountsModalStyled
       title="Просмотр cчёта"
@@ -102,6 +124,13 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
           {formatCurrency(Number(data.balance[0].amount.amount))}{" "}
           {CURRENCY_ICONS[String(data.account.currency)]}
         </h3>
+        <div>
+          Количества бонусов:{" "}
+          {bonuses && bonuses.rewardSummary.availableBalance}{" "}
+          {bonuses && CURRENCY_ICONS[bonuses.rewardSummary.currencyCode]}
+          <br />
+          {bonuses && bonuses.programDetail.description}
+        </div>
       </section>
       <section>
         <TextSwitchBlock>
@@ -143,9 +172,18 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
           )}
         </TextSwitchBlock>
         {activeMenu === EActiveMenu.transaction ? (
-          <Transaction data={transaction} />
+          <Transaction
+            data={transaction}
+            bonuses={bonuses}
+            handleGetBonuses={handleGetBonuses}
+          />
         ) : (
-          <Statement data={statement} transactionData={transaction} />
+          <Statement
+            data={statement}
+            transactionData={transaction}
+            bonuses={bonuses}
+            handleGetBonuses={handleGetBonuses}
+          />
         )}
       </section>
     </AccountsModalStyled>
