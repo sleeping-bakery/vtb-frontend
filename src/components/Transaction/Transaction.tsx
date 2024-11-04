@@ -11,7 +11,7 @@ import { CURRENCY_ICONS } from "../../shared/consts/icons";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { Button, InputNumber, Select } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createBonuses } from "../../shared/api/bonus";
 import { useAppSelector } from "../../app/store/hooks";
 import { selectToken } from "../../app/store/user/userSlice";
@@ -27,6 +27,7 @@ export const Transaction: React.FC<{
     amount: "",
     catalogId: "",
   });
+  const [bonus, setBonus] = useState(0);
 
   const handleSendBonuses = (id: string) => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
@@ -41,6 +42,18 @@ export const Transaction: React.FC<{
       handleGetBonuses();
     }
   };
+
+  useEffect(() => {
+    if (mainData.catalogId !== "" && mainData.amount !== "") {
+      const conversation =
+        mainData.catalogId !== "" && mainData.catalogId !== ""
+          ? bonuses?.programDetail?.catalogs.filter(
+              (catalog: any) => catalog.catalogId === mainData.catalogId
+            )[0].conversionRate
+          : 0;
+      setBonus(conversation * Number(mainData.amount));
+    }
+  }, [mainData]);
 
   return (
     <>
@@ -118,7 +131,7 @@ export const Transaction: React.FC<{
                     };
                   })}
                   value={mainData.catalogId}
-                  style={{ width: 150 }}
+                  style={{ width: 250 }}
                   onChange={(value) => {
                     const updatedData = { ...mainData };
 
@@ -134,6 +147,7 @@ export const Transaction: React.FC<{
                 >
                   Списать
                 </Button>
+                <p>Спишется: {bonus}</p>
               </div>
             )}
           </div>

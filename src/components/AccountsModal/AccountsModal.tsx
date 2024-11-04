@@ -105,7 +105,6 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
     handleModalClose();
   };
 
-  console.log(bonuses);
   return (
     <AccountsModalStyled
       title="Просмотр cчёта"
