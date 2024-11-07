@@ -13,6 +13,7 @@ import { Accounts } from "../../features/Accounts/Accounts";
 import { PeriodPayment } from "../../features/PeriodPayment/PeriodPayment";
 import { UnidentifiedPayment } from "../../features/UnidentifiedPayment/UnidentifiedPayment";
 import { Services } from "../../features/Services/Services";
+import { Guarantees } from "../../features/Guarantees/Guarantees";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -36,6 +37,10 @@ export const AppRouter = () => {
     {
       path: "/services",
       element: <Services />,
+    },
+    {
+      path: "/guarantee",
+      element: <Guarantees />,
     },
     {
       path: "*",

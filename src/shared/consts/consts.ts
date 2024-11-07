@@ -77,5 +77,10 @@ export const PERIOD_TYPE: Record<number, string> = {
 
 export const ALIGNMENT_TYPE: Record<number, string> = {
   1: "С даты согласия",
-  2: "С начала календарного месяца, когда было дано согласие"
-}
+  2: "С начала календарного месяца, когда было дано согласие",
+};
+
+export const TRANSLATED_ADDRESS_TYPE: Record<string, string> = {
+  LEGAL: "Юридический",
+  ACTUAL: "Фактический",
+};
