@@ -69,6 +69,7 @@ export const LoanCalculator = () => {
         }}
       />
       <br />
+      <br />
       <InputNumber
         style={{ width: 300 }}
         placeholder="Длительность кредита в годах"
@@ -80,6 +81,7 @@ export const LoanCalculator = () => {
           setMainData(updatedNewItem);
         }}
       />
+      <br />
       <br />
       <span>Процентная ставка</span>{" "}
       <InputNumber
@@ -127,12 +129,17 @@ export const LoanCalculator = () => {
           >
             Выбрать
           </Button>
+          <br />
+          <br />
           <Button
             type="primary"
             disabled={
               Number(mainData.selectedInterestRate) !==
               Number(bankItem.interestRate)
             }
+            onClick={() => {
+              window.location = bankItem.applicationUrl;
+            }}
           >
             Перейти
           </Button>

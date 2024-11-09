@@ -10,11 +10,15 @@ import { formatCurrency } from "../../shared/utils/formatCurrency";
 import { CURRENCY_ICONS } from "../../shared/consts/icons";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import { Button, InputNumber, Select } from "antd";
+import { Button, Divider, InputNumber, Select } from "antd";
 import { useEffect, useState } from "react";
 import { createBonuses } from "../../shared/api/bonus";
 import { useAppSelector } from "../../app/store/hooks";
 import { selectToken } from "../../app/store/user/userSlice";
+import {
+  createInstallmentPlan,
+  getBankOffer,
+} from "../../shared/api/installmentplan";
 
 export const Transaction: React.FC<{
   data: ITransaction[];
@@ -23,11 +27,13 @@ export const Transaction: React.FC<{
 }> = ({ data, bonuses, handleGetBonuses }) => {
   const token = useAppSelector(selectToken);
   const [openBonuses, setOpenBonuses] = useState("");
+  const [openInstallment, setOpenInstallment] = useState("");
   const [mainData, setMainData] = useState<any>({
     amount: "",
     catalogId: "",
   });
   const [bonus, setBonus] = useState(0);
+  const [installments, setInstallments] = useState<any>([]);
 
   const handleSendBonuses = (id: string) => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
@@ -95,6 +101,32 @@ export const Transaction: React.FC<{
                 Потратить бонусы
               </Button>
 
+              {item.creditDebitIndicator === 1 && (
+                <Button
+                  onClick={() => {
+                    if (process.env.REACT_APP_BACKEND_URL && token) {
+                      const handleSaveBank = (data: any) => {
+                        setInstallments([
+                          ...installments,
+                          { [item.transactionId]: data.data },
+                        ]);
+                      };
+
+                      setOpenInstallment(item.transactionId);
+                      getBankOffer(
+                        process.env.REACT_APP_BACKEND_URL,
+                        token,
+                        handleSaveBank,
+                        item.amount.amount,
+                        String(item.amount.currency)
+                      );
+                    }
+                  }}
+                >
+                  Взять в рассрочку
+                </Button>
+              )}
+
               <Amount>
                 <span
                   style={
@@ -108,8 +140,46 @@ export const Transaction: React.FC<{
               </Amount>
             </TransactionField>
 
+            {openInstallment === item.transactionId && (
+              <div>
+                <Divider />
+                {installments.filter(
+                  (instItem: any) =>
+                    Object.keys(instItem)[0] === item.transactionId
+                ).length > 0 &&
+                  installments
+                    .filter(
+                      (instItem: any) =>
+                        Object.keys(instItem)[0] === item.transactionId
+                    )[0]
+                    [item.transactionId].map((itemBank: any) => (
+                      <div key={itemBank.id}>
+                        <br />
+                        {itemBank.bankName}, {itemBank.quantityMonths}
+                        <br />
+                        <Button
+                          onClick={() => {
+                            if (process.env.REACT_APP_BACKEND_URL && token) {
+                              createInstallmentPlan(
+                                process.env.REACT_APP_BACKEND_URL,
+                                token,
+                                itemBank.id,
+                                item.transactionId
+                              );
+                              setOpenInstallment("");
+                            }
+                          }}
+                        >
+                          Оформить в рассрочку
+                        </Button>
+                      </div>
+                    ))}
+              </div>
+            )}
+
             {openBonuses === item.transactionId && (
               <div>
+                <Divider />
                 <InputNumber
                   placeholder="Сумма"
                   value={Number(mainData.amount)}

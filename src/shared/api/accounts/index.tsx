@@ -55,3 +55,13 @@ export const getTransaction = async (
 
   successHandler(transaction);
 };
+
+export const getTransactions = async (
+  baseUrl: string,
+  token: string,
+  successHandler: (transaction: any) => void
+) => {
+  const transaction = await baseGet(baseUrl + "/Transaction", token);
+
+  successHandler(transaction);
+};
