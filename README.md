@@ -9,7 +9,7 @@ REACT_APP_BACKEND_URL = 'СсылкаНаБэкенд'
 REACT_APP_PUBLIC_PIN_KEY='SUPERSECRET' #Ключ для генерации пинкода
 ```
 
-### Запуск в режими разработки
+### Запуск в режиме разработки
 
 1. `npm install`
 2. `npm start`
