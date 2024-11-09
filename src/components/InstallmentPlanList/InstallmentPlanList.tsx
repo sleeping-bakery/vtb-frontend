@@ -9,12 +9,14 @@ import {
 } from "../../shared/api/installmentplan";
 import { Button, Divider } from "antd";
 import { getTransactions } from "../../shared/api/accounts";
+import { CURRENCY_ICONS } from "../../shared/consts/icons";
 
 export const InstallmentPlanList = () => {
   const token = useAppSelector(selectToken);
 
   const [data, setData] = useState<any>([]);
   const [installments, setInstallments] = useState<any>([]);
+  const [transactions, setTransactions] = useState<any>([]);
 
   useEffect(() => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
@@ -50,6 +52,11 @@ export const InstallmentPlanList = () => {
                 ...installments,
                 { [transItem.transactionId]: data.data },
               ]);
+
+              setTransactions([
+                ...transactions,
+                { [transItem.transactionId]: transItem },
+              ]);
             };
 
             if (process.env.REACT_APP_BACKEND_URL && token) {
@@ -68,14 +75,20 @@ export const InstallmentPlanList = () => {
     }
   }, [data]);
 
-  console.log(installments);
   return (
     <InstallmentPlanListField>
       {data.map((dataItem: any) => {
         const iData = installments.filter(
           (iItem: any) => Object.keys(iItem)[0] === dataItem.transactionId
         );
+        const tData = transactions.filter(
+          (tItem: any) => Object.keys(tItem)[0] === dataItem.transactionId
+        );
+        console.log(tData);
+
         let bankInfo;
+        let transInfo = 0;
+        let transCurr;
 
         if (iData[0]) {
           bankInfo = iData[0][dataItem.transactionId].filter(
@@ -83,13 +96,19 @@ export const InstallmentPlanList = () => {
           )[0];
         }
 
+        if (tData[0] && tData[0][dataItem.transactionId]) {
+          transInfo = tData[0][dataItem.transactionId].amount.amount;
+          transCurr = tData[0][dataItem.transactionId].amount.currency;
+        }
+
         const currentNumber = dataItem.quantityMonths - dataItem.quantityMonths;
 
         return (
           <div key={dataItem.id}>
             <Divider />
-            {bankInfo?.bankName}, осталось месяцев {dataItem.quantityMonths},
-            всего месяцев {dataItem.quantityMonths}
+            {bankInfo?.bankName}, {transInfo} {CURRENCY_ICONS[transCurr]},
+            осталось месяцев {dataItem.quantityMonths}, всего месяцев{" "}
+            {dataItem.quantityMonths}
             <br />
             <br />
             <div style={{ display: "flex" }}>
