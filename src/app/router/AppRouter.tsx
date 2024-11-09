@@ -9,6 +9,13 @@ import { setUserId, setUserLogin, setUserToken } from "../store/user/userSlice";
 import { IConsentSlice, IUserResponse } from "../../shared/consts/types";
 import { UserSettingsConsents } from "../../shared/consts/enums";
 import { changeConsent } from "../store/consent/consentSlice";
+import { Accounts } from "../../features/Accounts/Accounts";
+import { PeriodPayment } from "../../features/PeriodPayment/PeriodPayment";
+import { UnidentifiedPayment } from "../../features/UnidentifiedPayment/UnidentifiedPayment";
+import { Services } from "../../features/Services/Services";
+import { Guarantees } from "../../features/Guarantees/Guarantees";
+import { LoanCalculator } from "../../features/LoanCalculator/LoanCalculator";
+import { InstallmentPlanList } from "../../components/InstallmentPlanList/InstallmentPlanList";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -18,8 +25,36 @@ export const AppRouter = () => {
 
   const routes = [
     {
-      path: "/settings",
-      element: <>123</>,
+      path: "/period-payments",
+      element: <PeriodPayment />,
+    },
+    {
+      path: "/accounts",
+      element: <Accounts />,
+    },
+    {
+      path: "/unidentified-payment",
+      element: <UnidentifiedPayment />,
+    },
+    {
+      path: "/services",
+      element: <Services />,
+    },
+    {
+      path: "/guarantee",
+      element: <Guarantees />,
+    },
+    {
+      path: "/loan-calculator",
+      element: <LoanCalculator />,
+    },
+    {
+      path: "/installment-plan-list",
+      element: <InstallmentPlanList />,
+    },
+    {
+      path: "*",
+      element: <Accounts />,
     },
   ];
 

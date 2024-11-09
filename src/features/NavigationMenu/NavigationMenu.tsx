@@ -11,8 +11,6 @@ import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
 import { Settings } from "../Settings/Settings";
-import { useAppSelector } from "../../app/store/hooks";
-import { selectLogin } from "../../app/store/user/userSlice";
 import { Button, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -24,21 +22,36 @@ interface INavigationMenu {
 const items: MenuProps["items"] = [
   {
     key: "1_navigation",
-    label: <Link to="#">Счета</Link>,
+    label: <Link to="accounts">Счета</Link>,
   },
   {
     key: "2_navigation",
-    label: <Link to="#">Кредиты</Link>,
+    label: <Link to="period-payments">Периодические платежи</Link>,
   },
   {
     key: "3_navigation",
-    label: <Link to="#">Ипотеки</Link>,
+    label: <Link to="unidentified-payment">Неидентефицированный платеж</Link>,
+  },
+  {
+    key: "4_navigation",
+    label: <Link to="services">Услуги ПУ</Link>,
+  },
+  {
+    key: "5_navigation",
+    label: <Link to="guarantee">Гарантии</Link>,
+  },
+  {
+    key: "6_navigation",
+    label: <Link to="loan-calculator">Ипотечный калькулятор</Link>,
+  },
+  {
+    key: "7_navigation",
+    label: <Link to="installment-plan-list">Список рассрочек</Link>,
   },
 ];
 
 export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const user = useAppSelector(selectLogin);
 
   const showModal = () => setIsModalOpen(true);
   const handleOk = () => setIsModalOpen(false);

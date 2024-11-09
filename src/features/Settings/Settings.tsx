@@ -1,6 +1,9 @@
-import { Checkbox, Modal } from "antd";
 import { USER_SETTINGS_CONSENTS } from "../../shared/consts/consts";
-import { SettingsCheckboxes } from "./Settings.styles";
+import {
+  SettingsCheckboxes,
+  StyledCheckbox,
+  StyledModal,
+} from "./Settings.styles";
 import { useState } from "react";
 import { ISettings } from "../../shared/consts/types";
 import { useAppSelector } from "../../app/store/hooks";
@@ -22,7 +25,7 @@ export const Settings: React.FC<ISettings> = ({ isOpen, confirm, cancel }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleOkModal = () => {
-    if (process.env.REACT_APP_BACKEND_URL && token) {
+    if (process.env.REACT_APP_BACKEND_URL && token && isClicked) {
       putUser(process.env.REACT_APP_BACKEND_URL, token, {
         id,
         login,
@@ -71,7 +74,7 @@ export const Settings: React.FC<ISettings> = ({ isOpen, confirm, cancel }) => {
   };
 
   return (
-    <Modal
+    <StyledModal
       title="Настройки пользователя"
       open={isOpen}
       onOk={handleOkModal}
@@ -82,7 +85,7 @@ export const Settings: React.FC<ISettings> = ({ isOpen, confirm, cancel }) => {
     >
       <SettingsCheckboxes>
         {USER_SETTINGS_CONSENTS.map((item) => (
-          <Checkbox
+          <StyledCheckbox
             key={item.id}
             onClick={() => {
               handleCheckboxClicked(item.idToRequest);
@@ -94,9 +97,9 @@ export const Settings: React.FC<ISettings> = ({ isOpen, confirm, cancel }) => {
             }
           >
             {item.name}
-          </Checkbox>
+          </StyledCheckbox>
         ))}
       </SettingsCheckboxes>
-    </Modal>
+    </StyledModal>
   );
 };
