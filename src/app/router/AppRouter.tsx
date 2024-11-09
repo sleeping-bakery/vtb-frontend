@@ -14,6 +14,7 @@ import { PeriodPayment } from "../../features/PeriodPayment/PeriodPayment";
 import { UnidentifiedPayment } from "../../features/UnidentifiedPayment/UnidentifiedPayment";
 import { Services } from "../../features/Services/Services";
 import { Guarantees } from "../../features/Guarantees/Guarantees";
+import { LoanCalculator } from "../../features/LoanCalculator/LoanCalculator";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -41,6 +42,10 @@ export const AppRouter = () => {
     {
       path: "/guarantee",
       element: <Guarantees />,
+    },
+    {
+      path: "/loan-calculator",
+      element: <LoanCalculator />,
     },
     {
       path: "*",

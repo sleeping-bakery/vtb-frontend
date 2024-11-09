@@ -2,8 +2,20 @@ import { useEffect, useState } from "react";
 import { GuaranteesField } from "./Guarantees.styled";
 import { useAppSelector } from "../../app/store/hooks";
 import { selectToken } from "../../app/store/user/userSlice";
-import { createGuarantee, getGuarantee } from "../../shared/api/guarantee";
-import { Button, DatePicker, Form, Input, InputNumber, Select } from "antd";
+import {
+  deleteGuarantee,
+  getGuarantee,
+  getGuaranteeDetails,
+} from "../../shared/api/guarantee";
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+} from "antd";
 import {
   AddressTypeEnum,
   CountryEnum,
@@ -300,8 +312,8 @@ export const Guarantees = () => {
     parentId: "",
     annualInterestRate: 0,
   });
-
-  const getGuarantees = () => {
+ 
+  useEffect(() => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
       const handleSaveData = (data: any) => {
         setData(data.data);
@@ -309,30 +321,23 @@ export const Guarantees = () => {
 
       getGuarantee(process.env.REACT_APP_BACKEND_URL, token, handleSaveData);
     }
-  };
-  useEffect(() => {
-    if (process.env.REACT_APP_BACKEND_URL && token) {
-      getGuarantees();
-    }
   }, [token]);
-
-  const handleSubmit = async () => {
-    if (process.env.REACT_APP_BACKEND_URL && token) {
-      const body = {
-        principal: {
-          id: "string",
-          addresses: [address],
-          bankAccounts: [bankDetails],
-          companyInfo: companyInfo,
-          contactPerson: contactPerson,
-          founders: {
-            founderCompanies: [
-              {
-                founderCompanies,
-                founderCompany,
-              },
-            ],
-          },
+ 
+  const handleSubmit = () => {
+    const body: any = {
+      principal: {
+        id: "string",
+        addresses: [address],
+        bankAccounts: [bankDetails],
+        companyInfo: companyInfo,
+        contactPerson: contactPerson,
+        founders: {
+          founderCompanies: [
+            {
+              founderCompanies,
+              founderCompany,
+            },
+          ],
           accountStatement: {
             annualReportData: {
               dateStart: "2024-11-07T07:14:07.031Z",
@@ -479,14 +484,20 @@ export const Guarantees = () => {
             fileName: "string",
           },
         ],
-      };
+      },
+    };
 
-      await createGuarantee(process.env.REACT_APP_BACKEND_URL, body, token);
-      setFormOpen(false);
-      getGuarantees();
-    }
+    // address,
+
+    // companyDetails,
+    // contactPerson,
+    // founderCompanies
+    // founderCompany
+    // bankGuarantee
+
+    console.log(body);
   };
-
+ 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setAddress((prevState) => ({
@@ -645,7 +656,30 @@ export const Guarantees = () => {
     }));
   };
 
-  console.log(data);
+  const [details, setDetails] = useState<any>([]);
+
+  const handleGetDetails = (id: string) => {
+    const handleSaveDetails = (data: any) => {
+      console.log(data.data);
+      setDetails([...details, { [id]: data.data }]);
+    };
+
+    if (process.env.REACT_APP_BACKEND_URL && token) {
+      getGuaranteeDetails(
+        process.env.REACT_APP_BACKEND_URL,
+        token,
+        handleSaveDetails,
+        id
+      );
+    }
+  };
+
+  const handleDeleteGuarantee = (id: string) => {
+    if (process.env.REACT_APP_BACKEND_URL && token) {
+      deleteGuarantee(process.env.REACT_APP_BACKEND_URL, id, token);
+    }
+  };
+
   return (
     <GuaranteesField>
       <Button
@@ -657,6 +691,83 @@ export const Guarantees = () => {
       </Button>
       <br />
       <br />
+      {data.map((itemData: any) => (
+        <div key={itemData.id}>
+          <p>{itemData.responseInit.orderNumber}</p>
+
+          <br />
+          {details.filter(
+            (itemFilter: any) =>
+              Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+          ).length > 0 && (
+            <div>
+              {String(
+                details.filter(
+                  (itemFilter: any) =>
+                    Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+                )[0][itemData.responseInit.orderId].label
+              )}
+              <br />
+              {String(
+                details.filter(
+                  (itemFilter: any) =>
+                    Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+                )[0][itemData.responseInit.orderId].statusDescription
+              )}
+              <br />
+              <br />
+              {String(
+                details.filter(
+                  (itemFilter: any) =>
+                    Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+                )[0][itemData.responseInit.orderId].annualInterestRate
+              )}
+              <br />
+              {String(
+                details.filter(
+                  (itemFilter: any) =>
+                    Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+                )[0][itemData.responseInit.orderId].bankGuaranteeSum
+              )}
+              <br />
+              {String(
+                details.filter(
+                  (itemFilter: any) =>
+                    Object.keys(itemFilter)[0] === itemData.responseInit.orderId
+                )[0][itemData.responseInit.orderId].commission
+              )}
+              <br />
+            </div>
+          )}
+
+          <Button
+            onClick={() => {
+              handleGetDetails(itemData.responseInit.orderId);
+            }}
+          >
+            Получить детали
+          </Button>
+          <br />
+          <Button
+            onClick={() => {
+              handleDeleteGuarantee(itemData.responseInit.orderId);
+            }}
+          >
+            Удалить гарантию
+          </Button>
+        </div>
+      ))}
+      {data.length > 0 && formOpen && (
+        <div>
+          <br />
+          <br />
+
+          <Divider />
+
+          <br />
+          <br />
+        </div>
+      )}
       {formOpen && (
         <div>
           <Form layout="vertical">
