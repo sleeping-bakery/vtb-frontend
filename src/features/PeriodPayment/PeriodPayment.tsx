@@ -8,7 +8,7 @@ import {
   getPeriodPayment,
   periodPayment,
 } from "../../shared/api/periodpayment";
-import { Button, Input, InputNumber, Select, Table } from "antd";
+import { Button, Input, InputNumber, Divider, Select, Table } from "antd";
 import {
   ALIGNMENT_TYPE,
   IDENTIFICATION_TYPE,
