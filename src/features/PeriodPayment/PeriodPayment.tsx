@@ -295,6 +295,8 @@ export const PeriodPayment = () => {
             onClick={async () => {
               handleFormClose();
               await handleCreateConsent();
+              window.location.reload(); 
+              window.location.reload(); 
             }}
           >
             Создать
@@ -346,6 +348,21 @@ export const PeriodPayment = () => {
           <br />
           <br />
           <Button
+            onClick={async () => {
+              if (process.env.REACT_APP_BACKEND_URL && token) {
+                await deletePeriodPayment(
+                  process.env.REACT_APP_BACKEND_URL,
+                  token,
+                  dataItem.id
+                );
+                window.location.reload(); 
+              }
+            }}
+          >
+            Удалить
+          </Button>
+          <Divider />
+          <Button
             type="primary"
             onClick={() => {
               setIsOpened(true);
@@ -355,25 +372,8 @@ export const PeriodPayment = () => {
           </Button>
           <br />
           <br />
-          <Button
-            onClick={async () => {
-              if (process.env.REACT_APP_BACKEND_URL && token) {
-                await deletePeriodPayment(
-                  process.env.REACT_APP_BACKEND_URL,
-                  token,
-                  dataItem.id
-                );
-              }
-            }}
-          >
-            Удалить
-            <br/>
-            <br/>
-            <Divider />
-            <br/>
-            <br/>
+         
 
-          </Button>
           {isPaymentOpened && (
             <div>
               <InputNumber

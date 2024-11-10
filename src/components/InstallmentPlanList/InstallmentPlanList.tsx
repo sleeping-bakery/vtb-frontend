@@ -142,7 +142,6 @@ export const InstallmentPlanList = () => {
                     token,
                     dataItem.id
                   );
-                  window.location.reload();
                 }
               }}
             >
