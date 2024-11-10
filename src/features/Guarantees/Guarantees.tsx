@@ -489,6 +489,7 @@ export const Guarantees = () => {
         },
       };
       createGuarantee(process.env.REACT_APP_BACKEND_URL, body, token);
+      window.location.reload();
     }
   };
 
@@ -1388,6 +1389,7 @@ export const Guarantees = () => {
           <br />
           <Button type="primary" onClick={handleSubmit}>
             Отправить
+
           </Button>
         </div>
       )}

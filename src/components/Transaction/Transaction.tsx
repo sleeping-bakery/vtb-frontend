@@ -206,6 +206,7 @@ export const Transaction: React.FC<{
                                 item.transactionId
                               );
                               setOpenInstallment("");
+                              window.location.reload();
                             }
                           }}
                         >
@@ -260,6 +261,7 @@ export const Transaction: React.FC<{
                 <Button
                   onClick={() => {
                     handleSendBonuses(item.transactionId);
+                    window.location.reload();
                   }}
                 >
                   Списать

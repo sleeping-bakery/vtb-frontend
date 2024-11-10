@@ -367,6 +367,12 @@ export const PeriodPayment = () => {
             }}
           >
             Удалить
+            <br/>
+            <br/>
+            <Divider />
+            <br/>
+            <br/>
+
           </Button>
           {isPaymentOpened && (
             <div>
@@ -377,6 +383,7 @@ export const PeriodPayment = () => {
                 placeholder="Сумма"
                 value={paymentValue || ""}
               />
+              {" "}
               <Button
                 onClick={async () => {
                   if (process.env.REACT_APP_BACKEND_URL && token) {
