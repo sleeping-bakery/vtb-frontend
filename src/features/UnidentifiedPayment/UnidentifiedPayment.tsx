@@ -85,22 +85,7 @@ export const UnidentifiedPayment = () => {
       />
       <br />
       <br />
-      <Input
-        style={{ width: 800 }}
-        placeholder="Имя получателя"
-        value={mainData.creditAccountIdentification}
-        onChange={(value) => {
-          const updatedData = { ...mainData };
-
-          updatedData.creditAccountIdentification = value.target.value;
-
-          setMainData(updatedData);
-        }}
-      />
-      <br />
-      <br />
       <span>Тип перевода: </span>
-
       <Select
         style={{ width: 300 }}
         placeholder="Тип перевода"
@@ -117,6 +102,20 @@ export const UnidentifiedPayment = () => {
           const updatedData = { ...mainData };
 
           updatedData.creditPaymentAccountIdentificationDynamicType = value;
+
+          setMainData(updatedData);
+        }}
+      />
+      <br />
+      <br />
+      <Input
+        style={{ width: 800 }}
+        placeholder="Реквизиты получателя"
+        value={mainData.creditAccountIdentification}
+        onChange={(value) => {
+          const updatedData = { ...mainData };
+
+          updatedData.creditAccountIdentification = value.target.value;
 
           setMainData(updatedData);
         }}
