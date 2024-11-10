@@ -51,6 +51,7 @@ export const UnidentifiedPayment = () => {
   return (
     <UnidentifiedPaymentField>
       <h1>Создание платежа</h1>
+      <br />
       <Select
         placeholder="Карта"
         options={cards.map((item: any) => {
@@ -60,7 +61,7 @@ export const UnidentifiedPayment = () => {
           };
         })}
         value={mainData.card}
-        style={{ width: 150 }}
+        style={{ width: 800 }}
         onChange={(value) => {
           const updatedData = { ...mainData };
 
@@ -69,6 +70,9 @@ export const UnidentifiedPayment = () => {
           setMainData(updatedData);
         }}
       />
+      <br />
+      <br />
+      <span>Сумма платежа: </span>
       <InputNumber
         placeholder="Сумма"
         value={Number(mainData.amount)}
@@ -79,8 +83,11 @@ export const UnidentifiedPayment = () => {
           setMainData(updatedNewItem);
         }}
       />
+      <br />
+      <br />
       <Input
-        placeholder="Получатель значение"
+        style={{ width: 800 }}
+        placeholder="Имя получателя"
         value={mainData.creditAccountIdentification}
         onChange={(value) => {
           const updatedData = { ...mainData };
@@ -90,8 +97,13 @@ export const UnidentifiedPayment = () => {
           setMainData(updatedData);
         }}
       />
+      <br />
+      <br />
+      <span>Тип перевода: </span>
+
       <Select
-        placeholder="Тип оплаты"
+        style={{ width: 300 }}
+        placeholder="Тип перевода"
         value={mainData.creditPaymentAccountIdentificationDynamicType}
         options={Array(Object.values(IDENTIFICATION_TYPE).length)
           .fill(0)
@@ -101,7 +113,6 @@ export const UnidentifiedPayment = () => {
               label: IDENTIFICATION_TYPE[index + 1],
             };
           })}
-        style={{ width: 150 }}
         onChange={(value) => {
           const updatedData = { ...mainData };
 
@@ -110,6 +121,8 @@ export const UnidentifiedPayment = () => {
           setMainData(updatedData);
         }}
       />
+      <br />
+      <br />
       <Button onClick={handleSendPayment}>Отправить</Button>
     </UnidentifiedPaymentField>
   );

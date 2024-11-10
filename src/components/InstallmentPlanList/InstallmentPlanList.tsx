@@ -101,13 +101,13 @@ export const InstallmentPlanList = () => {
           transCurr = tData[0][dataItem.transactionId].amount.currency;
         }
 
-        const currentNumber = dataItem.quantityMonths - dataItem.quantityMonths;
+        const currentNumber = dataItem.quantityMonths - dataItem.remainingMonths;
 
         return (
           <div key={dataItem.id}>
             <Divider />
             {bankInfo?.bankName}, {transInfo} {CURRENCY_ICONS[transCurr]},
-            осталось месяцев {dataItem.quantityMonths}, всего месяцев{" "}
+            осталось месяцев {dataItem.remainingMonths}, всего месяцев{" "}
             {dataItem.quantityMonths}
             <br />
             <br />

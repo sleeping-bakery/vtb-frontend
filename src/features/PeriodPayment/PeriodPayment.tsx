@@ -136,11 +136,14 @@ export const PeriodPayment = () => {
       <Button onClick={handleFormOpen}>Создание подписки</Button>
       {createSubForm && (
         <div>
+          <br />
           <h3>Форма создания подписки</h3>
+          <br />
           <InputNumber
             value={mainData.amount}
             placeholder="Сумма"
             min={0}
+            style={{ width: 600 }}
             onChange={(value) => {
               const updatedData = { ...mainData };
 
@@ -149,6 +152,8 @@ export const PeriodPayment = () => {
               setMainData(updatedData);
             }}
           />
+          <br />
+          <br />
           <Select
             placeholder="Карта"
             options={cards.map((item: any) => {
@@ -158,7 +163,7 @@ export const PeriodPayment = () => {
               };
             })}
             value={mainData.card}
-            style={{ width: 150 }}
+            style={{ width: 600 }}
             onChange={(value) => {
               const updatedData = { ...mainData };
 
@@ -167,7 +172,10 @@ export const PeriodPayment = () => {
               setMainData(updatedData);
             }}
           />
-          <p>Получатель</p>
+          <br />
+          <br />
+          <h3>Получатель</h3>
+          <br />
           <Input
             placeholder="Именование получателя"
             value={mainData.creditorName}
@@ -178,7 +186,10 @@ export const PeriodPayment = () => {
 
               setMainData(updatedData);
             }}
+            style={{ width: 800 }}
           />
+          <br />
+          <br />
           <Select
             placeholder="Тип оплаты подписки"
             value={mainData.creditorType}
@@ -190,6 +201,7 @@ export const PeriodPayment = () => {
                   label: IDENTIFICATION_TYPE[index + 1],
                 };
               })}
+            style={{ width: 800 }}
             onChange={(value) => {
               const updatedData = { ...mainData };
 
@@ -198,6 +210,8 @@ export const PeriodPayment = () => {
               setMainData(updatedData);
             }}
           />
+          <br />
+          <br />
           <Input
             placeholder="Реквизит для оплаты"
             value={mainData.paymentData}
@@ -208,8 +222,12 @@ export const PeriodPayment = () => {
 
               setMainData(updatedData);
             }}
+            style={{ width: 800 }}
           />
-          <p>Добавление ограничения</p>
+          <br />
+          <br />
+          <h3>Добавление ограничения</h3>
+          <br />
           <Select
             options={Array(Object.values(PERIOD_TYPE).length)
               .fill(0)
@@ -224,7 +242,7 @@ export const PeriodPayment = () => {
 
               setNewItem(updatedNewItem);
             }}
-          />
+          />{" "}
           <Select
             options={Array(Object.values(ALIGNMENT_TYPE).length)
               .fill(0)
@@ -239,7 +257,7 @@ export const PeriodPayment = () => {
 
               setNewItem(updatedNewItem);
             }}
-          />
+          />{" "}
           <InputNumber
             placeholder="Сумма"
             min={0}
@@ -251,6 +269,8 @@ export const PeriodPayment = () => {
               setNewItem(updatedNewItem);
             }}
           />
+          <br />
+          <br />
           <Button
             onClick={() => {
               setItems([
@@ -266,7 +286,11 @@ export const PeriodPayment = () => {
           >
             Добавить ограничение
           </Button>
+          <br />
+          <br />
           <Table columns={columns} dataSource={items} />
+          <br />
+          <br />
           <Button
             onClick={async () => {
               handleFormClose();
@@ -296,6 +320,7 @@ export const PeriodPayment = () => {
       <br />
       <br />
       <h2>Подписки</h2>
+      <br />
 
       {data.map((dataItem: any) => (
         <div key={dataItem.consentBanking.data.consentId}>
@@ -328,6 +353,7 @@ export const PeriodPayment = () => {
           >
             Совершить платёж
           </Button>
+          <br />
           <br />
           <Button
             onClick={async () => {

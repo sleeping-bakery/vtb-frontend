@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/store/hooks";
 import { selectToken } from "../../app/store/user/userSlice";
 import { getBanks, postCalculator } from "../../shared/api/loancalculator";
+import { CURRENCY_ICONS } from "../../shared/consts/icons";
 
 export const LoanCalculator = () => {
   const token = useAppSelector(selectToken);
@@ -42,12 +43,6 @@ export const LoanCalculator = () => {
         token,
         handleSavePost
       );
-
-      setMainData({
-        loanAmount: 0,
-        loanTermInYears: 0,
-        selectedInterestRate: 0,
-      });
     }
   };
 
@@ -104,18 +99,21 @@ export const LoanCalculator = () => {
       <br />
       <br />
       <div>
-        <p>Ежемесячная выплата: </p>
-        <span>{afterCalc.monthlyPayment}</span>
-        <p>Общая выплата: </p>
-        <span>{afterCalc.totalPayment}</span>
-        <p>Ставка: </p>
-        <span>{afterCalc.totalInterest}</span>
+        <span>Ежемесячная выплата: </span>
+        <span>{Number(afterCalc.monthlyPayment).toFixed(2)}</span>
+        <br />
+        <span>Общая выплата: </span>
+        <span>{Number(afterCalc.totalPayment).toFixed(2)}</span>
+        <br />
+        <span>Ставка: </span>
+        <span>{Number(afterCalc.totalInterest).toFixed(2)}</span>
       </div>
       <Divider />
       {banks.map((bankItem: any) => (
         <div key={bankItem.applicationUrl}>
           <span>{bankItem.bankName}</span> -{" "}
           <span>{bankItem.interestRate}%</span>
+          <br />
           <br />
           <Button
             onClick={() => {
@@ -128,9 +126,7 @@ export const LoanCalculator = () => {
             }}
           >
             Выбрать
-          </Button>
-          <br />
-          <br />
+          </Button>{" "}
           <Button
             type="primary"
             disabled={
@@ -145,6 +141,7 @@ export const LoanCalculator = () => {
           </Button>
           <br />
           <br />
+          <Divider/>
         </div>
       ))}
     </LoanCalculatorField>
