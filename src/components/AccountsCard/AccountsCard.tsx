@@ -53,6 +53,7 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
         accountId: id,
       });
     }
+    window.location.reload();
   };
 
   const handleGetDetails = async (cardId: string) => {
@@ -102,17 +103,23 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
       <div>
         {cards.map((card: any, index: number) => (
           <div key={card.id}>
-            <Button
-              onClick={async () => {
-                await handleDeleteCard(card.id);
-              }}
-            >
-              Удалить карту
-            </Button>{" "}
-            <Button onClick={showModal}>Изменить данные</Button> Карта №
-            {index + 1} {card.pan} {CARD_STATUSES[card.status]}
+            Карта №{index + 1} {card.pan} {CARD_STATUSES[card.status]}
             <br />
             <br />
+            {cardDetails[card.id] && (
+              <div>
+                Действительна до: {cardDetails[card.id].cardExpiry}
+                <br />
+                Владелец: {cardDetails[card.id].embossingName}
+              </div>
+            )}
+            {cardCVVs[card.id] && (
+              <div>
+                CVV: {cardCVVs[card.id].cvv}
+                <br />
+                <br />
+              </div>
+            )}
             <Button
               onClick={async () => {
                 await handleGetDetails(card.id);
@@ -120,21 +127,16 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
               }}
             >
               Детали
+            </Button>{" "}
+            <Button onClick={showModal}>Изменить данные</Button>{" "}
+            <Button
+              onClick={async () => {
+                await handleDeleteCard(card.id);
+              }}
+            >
+              Удалить карту
             </Button>
-            {cardDetails[card.id] && (
-              <div>
-                {cardDetails[card.id].cardExpiry}
-                <br />
-                {cardDetails[card.id].embossingName}
-              </div>
-            )}
-            {cardCVVs[card.id] && (
-              <div>
-                {cardCVVs[card.id].cvv}
-                <br />
-                <br />
-              </div>
-            )}
+            <Divider />
             <Modal
               title="Изменение данных карты"
               open={isModalOpen}
@@ -144,9 +146,11 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
               }}
               onCancel={handleCancel}
             >
+              <br />
               <Select
+                placeholder="Статус карты"
                 defaultValue={CARD_STATUSES[card.status]}
-                style={{ width: 300 }}
+                style={{ width: 400 }}
                 onChange={handleChange}
                 options={[
                   { value: 1, label: CARD_STATUSES[1] },
@@ -154,7 +158,15 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
                   { value: 3, label: CARD_STATUSES[3] },
                 ]}
               />
-              <Input placeholder="Новый пинкод" onChange={handleChangePin} />
+              <br />
+              <br />
+              <Input
+                style={{ width: 400 }}
+                placeholder="Новый пинкод"
+                onChange={handleChangePin}
+              />
+              <br />
+              <br />
             </Modal>
           </div>
         ))}

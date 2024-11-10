@@ -62,9 +62,12 @@ export const Services = () => {
       >
         Создать платеж
       </Button>
+      <br />
+      <br />
 
       {openCreated && (
         <div>
+          <p>Услуга</p>
           <Select
             placeholder="Услуга"
             options={dataItems.map((item: any) => {
@@ -73,8 +76,8 @@ export const Services = () => {
                 label: item.shortName,
               };
             })}
+            style={{ width: 800 }}
             value={mainData.serviceId}
-            style={{ width: 150 }}
             onChange={(value) => {
               const updatedData = { ...mainData };
 
@@ -83,6 +86,10 @@ export const Services = () => {
               setMainData(updatedData);
             }}
           />
+          <br />
+          <br />
+          <p>Карта</p>
+
           <Select
             placeholder="Карта"
             options={cards.map((item: any) => {
@@ -91,8 +98,8 @@ export const Services = () => {
                 label: item.pan,
               };
             })}
+            style={{ width: 800 }}
             value={mainData.cardId}
-            style={{ width: 150 }}
             onChange={(value) => {
               const updatedData = { ...mainData };
 
@@ -101,9 +108,14 @@ export const Services = () => {
               setMainData(updatedData);
             }}
           />
+          <br />
+          <br />
+          <p>Сумма</p>
+
           <InputNumber
             placeholder="Сумма"
             value={Number(mainData.amount)}
+            style={{ width: 800 }}
             onChange={(value) => {
               const updatedNewItem = { ...mainData };
               updatedNewItem.amount = String(value);
@@ -111,6 +123,10 @@ export const Services = () => {
               setMainData(updatedNewItem);
             }}
           />
+
+          <br />
+          <br />
+
           <Button onClick={handleSendPayment}>Отправить</Button>
         </div>
       )}
@@ -127,7 +143,9 @@ export const Services = () => {
           <div>
             <br />
             <br />
-            <p>Приёмник:</p>
+            {item?.receiver?.bank?.name !== "" &&
+              item?.receiver?.bank?.name !== undefined &&
+              item?.receiver?.bank?.name !== null && <p>Приёмник:</p>}
             <br />
             <div>
               <p>{item?.receiver?.bank?.name && item.receiver.bank.name}</p>
