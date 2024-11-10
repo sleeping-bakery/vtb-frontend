@@ -655,7 +655,6 @@ export const Guarantees = () => {
 
   const handleGetDetails = (id: string) => {
     const handleSaveDetails = (data: any) => {
-      console.log(data.data);
       setDetails([...details, { [id]: data.data }]);
     };
 
@@ -1389,7 +1388,6 @@ export const Guarantees = () => {
           <br />
           <Button type="primary" onClick={handleSubmit}>
             Отправить
-
           </Button>
         </div>
       )}

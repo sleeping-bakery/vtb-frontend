@@ -31,6 +31,10 @@ export const Settings: React.FC<ISettings> = ({ isOpen, confirm, cancel }) => {
         login,
         accountConsents: requestIds,
       });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
 
     confirm();

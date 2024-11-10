@@ -84,7 +84,6 @@ export const InstallmentPlanList = () => {
         const tData = transactions.filter(
           (tItem: any) => Object.keys(tItem)[0] === dataItem.transactionId
         );
-        console.log(tData);
 
         let bankInfo;
         let transInfo = 0;

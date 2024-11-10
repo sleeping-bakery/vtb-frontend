@@ -132,6 +132,7 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
             <Button
               onClick={async () => {
                 await handleDeleteCard(card.id);
+                window.location.reload();
               }}
             >
               Удалить карту

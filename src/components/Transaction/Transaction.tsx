@@ -37,6 +37,16 @@ export const Transaction: React.FC<{
   const [installments, setInstallments] = useState<any>([]);
   const [iData, setI] = useState<any>([]);
 
+  const handleLoadI = () => {
+    if (process.env.REACT_APP_BACKEND_URL && token) {
+      const handleSaveI = (data: any) => {
+        setI(data.data);
+      };
+
+      getInstallmentPlan(process.env.REACT_APP_BACKEND_URL, token, handleSaveI);
+    }
+  };
+
   const handleSendBonuses = (id: string) => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
       const body = {
@@ -48,6 +58,7 @@ export const Transaction: React.FC<{
 
       createBonuses(process.env.REACT_APP_BACKEND_URL, body, token);
       handleGetBonuses();
+      handleLoadI();
     }
   };
 
@@ -65,11 +76,7 @@ export const Transaction: React.FC<{
 
   useEffect(() => {
     if (process.env.REACT_APP_BACKEND_URL && token) {
-      const handleSaveI = (data: any) => {
-        setI(data.data);
-      };
-
-      getInstallmentPlan(process.env.REACT_APP_BACKEND_URL, token, handleSaveI);
+      handleLoadI();
     }
   }, [token]);
 
@@ -114,8 +121,7 @@ export const Transaction: React.FC<{
                   >
                     Потратить бонусы
                   </Button>
-                )}
-                {" "}
+                )}{" "}
                 {item.creditDebitIndicator === 1 &&
                   iData.filter(
                     (itemI: any) => itemI.transactionId === item.transactionId
@@ -204,7 +210,10 @@ export const Transaction: React.FC<{
                                 process.env.REACT_APP_BACKEND_URL,
                                 token,
                                 itemBank.id,
-                                item.transactionId
+                                item.transactionId,
+                                () => {
+                                  handleLoadI();
+                                }
                               );
                               setOpenInstallment("");
                             }

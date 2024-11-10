@@ -27,7 +27,8 @@ export const createInstallmentPlan = async (
   url: string,
   token: string,
   bankOfferId: string,
-  transactionId: string
+  transactionId: string,
+  afterHandler: any
 ) => {
   await axios.post(
     url +
@@ -42,6 +43,8 @@ export const createInstallmentPlan = async (
       },
     }
   );
+
+  afterHandler();
 };
 
 export const getInstallmentPlan = async (

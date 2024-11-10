@@ -295,8 +295,8 @@ export const PeriodPayment = () => {
             onClick={async () => {
               handleFormClose();
               await handleCreateConsent();
-              window.location.reload(); 
-              window.location.reload(); 
+              window.location.reload();
+              window.location.reload();
             }}
           >
             Создать
@@ -355,7 +355,7 @@ export const PeriodPayment = () => {
                   token,
                   dataItem.id
                 );
-                window.location.reload(); 
+                window.location.reload();
               }
             }}
           >
@@ -372,8 +372,6 @@ export const PeriodPayment = () => {
           </Button>
           <br />
           <br />
-         
-
           {isPaymentOpened && (
             <div>
               <InputNumber
@@ -382,8 +380,7 @@ export const PeriodPayment = () => {
                 }}
                 placeholder="Сумма"
                 value={paymentValue || ""}
-              />
-              {" "}
+              />{" "}
               <Button
                 onClick={async () => {
                   if (process.env.REACT_APP_BACKEND_URL && token) {

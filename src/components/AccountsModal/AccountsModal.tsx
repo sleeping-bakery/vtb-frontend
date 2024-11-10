@@ -107,7 +107,7 @@ export const AccountsModal: React.FC<AccountsModalProps> = ({
 
   return (
     <AccountsModalStyled
-      title="Просмотр cчёта"
+      title="Просмотр счёта"
       open={isOpen}
       onCancel={handleCancel}
       centered

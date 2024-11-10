@@ -50,6 +50,7 @@ export const Services = () => {
         serviceId: "",
       });
       setOpenCreated(false);
+      window.location.reload();
     }
   };
 
