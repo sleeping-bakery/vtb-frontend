@@ -16,6 +16,7 @@ import { Services } from "../../features/Services/Services";
 import { Guarantees } from "../../features/Guarantees/Guarantees";
 import { LoanCalculator } from "../../features/LoanCalculator/LoanCalculator";
 import { InstallmentPlanList } from "../../components/InstallmentPlanList/InstallmentPlanList";
+import { Operations } from "../../features/Operations/Operations";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -51,6 +52,10 @@ export const AppRouter = () => {
     {
       path: "/installment-plan-list",
       element: <InstallmentPlanList />,
+    },
+    {
+      path: "/operations",
+      element: <Operations />,
     },
     {
       path: "*",
