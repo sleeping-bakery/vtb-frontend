@@ -48,6 +48,10 @@ const items: MenuProps["items"] = [
     key: "7_navigation",
     label: <Link to="installment-plan-list">Список рассрочек</Link>,
   },
+  {
+    key: "8_navigation",
+    label: <Link to="operations">Операции</Link>,
+  },
 ];
 
 export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
