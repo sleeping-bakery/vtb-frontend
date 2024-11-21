@@ -1,9 +1,9 @@
 import Keycloak from "keycloak-js";
 
 export const keycloak = new Keycloak({
-  url: "http://localhost:8080",
+  url: "https://admin.arcanoom.xyz",
   realm: "master",
-  clientId: "multibanks-frontend",
+  clientId: "multibanks_frontend",
 });
 
 export default keycloak;
