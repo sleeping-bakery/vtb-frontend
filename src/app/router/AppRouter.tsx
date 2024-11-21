@@ -17,6 +17,9 @@ import { Guarantees } from "../../features/Guarantees/Guarantees";
 import { LoanCalculator } from "../../features/LoanCalculator/LoanCalculator";
 import { InstallmentPlanList } from "../../components/InstallmentPlanList/InstallmentPlanList";
 import { Operations } from "../../features/Operations/Operations";
+import { Investments } from "../../features/Investments/Investments";
+import { Contributions } from "../../features/Contributions/Contributions";
+import ChatFloatButton from "../../ui/ChatFloatButton/ChatFloatButton";
 
 export const AppRouter = () => {
   const { keycloak } = useKeycloak();
@@ -58,6 +61,18 @@ export const AppRouter = () => {
       element: <Operations />,
     },
     {
+      path: "/operations",
+      element: <Operations />,
+    },
+    {
+      path: "/investments",
+      element: <Investments />,
+    },
+    {
+      path: "/contributions",
+      element: <Contributions />,
+    },
+    {
       path: "*",
       element: <Accounts />,
     },
@@ -92,18 +107,21 @@ export const AppRouter = () => {
 
   return (
     isLoggedIn && (
-      <Container>
-        <NavigationMenu onLogout={keycloak.logout} />
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path.replace("/", "")}
-              path={route.path}
-              element={route.element}
-            />
-          ))}
-        </Routes>
-      </Container>
+      <>
+        <Container>
+          <NavigationMenu onLogout={keycloak.logout} />
+          <Routes>
+            {routes.map((route) => (
+              <Route
+                key={route.path.replace("/", "")}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Routes>
+        </Container>
+        <ChatFloatButton />
+      </>
     )
   );
 };

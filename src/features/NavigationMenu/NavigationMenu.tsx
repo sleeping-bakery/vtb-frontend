@@ -52,6 +52,14 @@ const items: MenuProps["items"] = [
     key: "8_navigation",
     label: <Link to="operations">Операции</Link>,
   },
+  {
+    key: "9_navigation",
+    label: <Link to="contributions">Вклады</Link>,
+  },
+  {
+    key: "10_navigation",
+    label: <Link to="investments">Инвестиции</Link>,
+  },
 ];
 
 export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
