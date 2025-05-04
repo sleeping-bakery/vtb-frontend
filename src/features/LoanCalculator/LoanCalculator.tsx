@@ -100,13 +100,13 @@ export const LoanCalculator = () => {
       <br />
       <div>
         <span>Ежемесячная выплата: </span>
-        <span>{Number(afterCalc.monthlyPayment).toFixed(2)}</span>
+        <span>{Number(afterCalc.monthlyPayment).toFixed(0)} ₽</span>
         <br />
         <span>Общая выплата: </span>
-        <span>{Number(afterCalc.totalPayment).toFixed(2)}</span>
+        <span>{Number(afterCalc.totalPayment).toFixed(0)} ₽</span>
         <br />
         <span>Ставка: </span>
-        <span>{Number(afterCalc.totalInterest).toFixed(2)}</span>
+        <span>{Number(afterCalc.totalInterest).toFixed(0)} ₽</span>
       </div>
       <Divider />
       {banks.map((bankItem: any) => (
@@ -141,7 +141,7 @@ export const LoanCalculator = () => {
           </Button>
           <br />
           <br />
-          <Divider/>
+          <Divider />
         </div>
       ))}
     </LoanCalculatorField>

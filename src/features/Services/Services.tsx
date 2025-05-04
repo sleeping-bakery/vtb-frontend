@@ -50,7 +50,6 @@ export const Services = () => {
         serviceId: "",
       });
       setOpenCreated(false);
-      window.location.reload();
     }
   };
 
@@ -68,7 +67,7 @@ export const Services = () => {
 
       {openCreated && (
         <div>
-          <p>Услуга</p>
+          <p style={{ marginBottom: "4px" }}>Услуга</p>
           <Select
             placeholder="Услуга"
             options={dataItems.map((item: any) => {
@@ -89,7 +88,7 @@ export const Services = () => {
           />
           <br />
           <br />
-          <p>Карта</p>
+          <p style={{ marginBottom: "4px" }}>Карта</p>
 
           <Select
             placeholder="Карта"
@@ -111,7 +110,7 @@ export const Services = () => {
           />
           <br />
           <br />
-          <p>Сумма</p>
+          <p style={{ marginBottom: "4px" }}>Сумма</p>
 
           <InputNumber
             placeholder="Сумма"

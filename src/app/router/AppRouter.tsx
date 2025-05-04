@@ -109,7 +109,9 @@ export const AppRouter = () => {
     isLoggedIn && (
       <>
         <Container>
-          <NavigationMenu onLogout={keycloak.logout} />
+          <NavigationMenu
+           onLogout={keycloak.logout}
+            />
           <Routes>
             {routes.map((route) => (
               <Route
@@ -120,7 +122,7 @@ export const AppRouter = () => {
             ))}
           </Routes>
         </Container>
-        <ChatFloatButton />
+        {/* <ChatFloatButton />ё */}
       </>
     )
   );

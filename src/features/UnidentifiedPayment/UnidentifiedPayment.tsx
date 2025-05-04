@@ -72,18 +72,20 @@ export const UnidentifiedPayment = () => {
       />
       <br />
       <br />
-      <span>Сумма платежа: </span>
-      <InputNumber
-        placeholder="Сумма"
-        value={Number(mainData.amount)}
+      <Input
+        style={{ width: 800 }}
+        placeholder="Реквизиты получателя"
+        value={mainData.creditAccountIdentification}
         onChange={(value) => {
-          const updatedNewItem = { ...mainData };
-          updatedNewItem.amount = String(value);
+          const updatedData = { ...mainData };
 
-          setMainData(updatedNewItem);
+          updatedData.creditAccountIdentification = value.target.value;
+
+          setMainData(updatedData);
         }}
       />
       <br />
+
       <br />
       <span>Тип перевода: </span>
       <Select
@@ -108,16 +110,15 @@ export const UnidentifiedPayment = () => {
       />
       <br />
       <br />
-      <Input
-        style={{ width: 800 }}
-        placeholder="Реквизиты получателя"
-        value={mainData.creditAccountIdentification}
+      <span>Сумма платежа: </span>
+      <InputNumber
+        placeholder="Сумма"
+        value={Number(mainData.amount)}
         onChange={(value) => {
-          const updatedData = { ...mainData };
+          const updatedNewItem = { ...mainData };
+          updatedNewItem.amount = String(value);
 
-          updatedData.creditAccountIdentification = value.target.value;
-
-          setMainData(updatedData);
+          setMainData(updatedNewItem);
         }}
       />
       <br />

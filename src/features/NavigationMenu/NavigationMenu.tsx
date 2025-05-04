@@ -6,7 +6,7 @@ import {
   NavigationBlock,
   NavigationMenuSubBlock,
 } from "./NavigationMenu.styled";
-import vtblogo from "../../shared/assets/vtblogo.jpg";
+import kteplogo from "../../shared/assets/ktep40.jpg";
 import { Link } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useState } from "react";
@@ -16,7 +16,7 @@ import type { MenuProps } from "antd";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 interface INavigationMenu {
-  onLogout: () => void;
+  onLogout?: () => void;
 }
 
 const items: MenuProps["items"] = [
@@ -37,28 +37,12 @@ const items: MenuProps["items"] = [
     label: <Link to="services">Услуги ПУ</Link>,
   },
   {
-    key: "5_navigation",
-    label: <Link to="guarantee">Гарантии</Link>,
-  },
-  {
     key: "6_navigation",
     label: <Link to="loan-calculator">Ипотечный калькулятор</Link>,
   },
   {
     key: "7_navigation",
     label: <Link to="installment-plan-list">Список рассрочек</Link>,
-  },
-  {
-    key: "8_navigation",
-    label: <Link to="operations">Операции</Link>,
-  },
-  {
-    key: "9_navigation",
-    label: <Link to="contributions">Вклады</Link>,
-  },
-  {
-    key: "10_navigation",
-    label: <Link to="investments">Инвестиции</Link>,
   },
 ];
 
@@ -73,7 +57,7 @@ export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
     <NavigationBlock>
       <MenuDropdown>
         <Link to="/">
-          <ImageLogo src={vtblogo} />
+          <ImageLogo src={kteplogo} />
         </Link>
         <Dropdown menu={{ items }} placement="bottom">
           <Button>Меню</Button>
@@ -87,7 +71,9 @@ export const NavigationMenu: React.FC<INavigationMenu> = ({ onLogout }) => {
           icon={<SettingsIcon />}
         />
 
-        <ExitButton onClick={onLogout} icon={<LogoutIcon />} />
+        <ExitButton onClick={() => {
+          onLogout && onLogout();
+        }} icon={<LogoutIcon />} />
       </NavigationMenuSubBlock>
 
       <Settings isOpen={isModalOpen} confirm={handleOk} cancel={handleCancel} />

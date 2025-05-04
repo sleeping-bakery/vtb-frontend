@@ -75,5 +75,6 @@ export const createInstallmentPlanPayment = async (
       },
     }
   );
+
   window.location.reload();
 };

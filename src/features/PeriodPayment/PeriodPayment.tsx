@@ -295,8 +295,27 @@ export const PeriodPayment = () => {
             onClick={async () => {
               handleFormClose();
               await handleCreateConsent();
-              window.location.reload();
-              window.location.reload();
+
+              if (process.env.REACT_APP_BACKEND_URL && token) {
+                getPeriodPayment(
+                  process.env.REACT_APP_BACKEND_URL,
+                  token,
+                  (dataPayments: any) => {
+                    setData(dataPayments);
+                  }
+                );
+
+                getCards(
+                  process.env.REACT_APP_BACKEND_URL,
+                  token,
+                  (dataCards: any) => {
+                    setCards(dataCards);
+                  }
+                );
+              }
+
+              // window.location.reload();
+              // window.location.reload();
             }}
           >
             Создать
@@ -355,7 +374,26 @@ export const PeriodPayment = () => {
                   token,
                   dataItem.id
                 );
-                window.location.reload();
+
+                if (process.env.REACT_APP_BACKEND_URL && token) {
+                  getPeriodPayment(
+                    process.env.REACT_APP_BACKEND_URL,
+                    token,
+                    (dataPayments: any) => {
+                      setData(dataPayments);
+                    }
+                  );
+
+                  getCards(
+                    process.env.REACT_APP_BACKEND_URL,
+                    token,
+                    (dataCards: any) => {
+                      setCards(dataCards);
+                    }
+                  );
+                }
+
+                // window.location.reload();
               }
             }}
           >

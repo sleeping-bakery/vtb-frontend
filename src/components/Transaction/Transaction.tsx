@@ -154,8 +154,7 @@ export const Transaction: React.FC<{
                   (itemI: any) => itemI.transactionId === item.transactionId
                 ).length !== 0 && (
                   <span>
-                    {" "}
-                    Рассрочка{"   "}
+                    Рассрочка {" "}
                     {
                       iData.filter(
                         (itemI: any) =>

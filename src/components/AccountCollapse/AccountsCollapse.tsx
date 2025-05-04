@@ -11,7 +11,7 @@ import { AccountsModal } from "../AccountsModal/AccountsModal";
 import { useState } from "react";
 
 export const AccountsCollapse: React.FC<AccountsCollapseProps> = (props) => {
-  const { collapseData: data, cards } = props;
+  const { collapseData: data, cards, getData } = props;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isModalOpen, setOpenModal] = useState(false);
 
@@ -64,6 +64,7 @@ export const AccountsCollapse: React.FC<AccountsCollapseProps> = (props) => {
                   (card) => card.accountId === accountData.account.accountId
                 )}
                 id={accountData.account.accountId}
+                getData={getData}
               />
             ),
             extra: (

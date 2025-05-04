@@ -12,10 +12,11 @@ import { useState } from "react";
 import { CARD_STATUSES } from "../../shared/consts/consts";
 import { sha256 } from "js-sha256";
 
-export const AccountCard: React.FC<{ id: string; cards: any }> = ({
-  id,
-  cards,
-}) => {
+export const AccountCard: React.FC<{
+  id: string;
+  cards: any;
+  getData: any;
+}> = ({ id, cards, getData }) => {
   const [cardDetails, setCardsDetails] = useState<Record<any, any>>({});
   const [cardCVVs, setCardCVV] = useState<Record<any, any>>({});
   const token = useAppSelector(selectToken);
@@ -40,6 +41,10 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
       };
 
       await updateCard(process.env.REACT_APP_BACKEND_URL, body, token);
+
+      setTimeout(() => {
+        getData();
+      }, 300);
     }
   };
 
@@ -53,7 +58,6 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
         accountId: id,
       });
     }
-    window.location.reload();
   };
 
   const handleGetDetails = async (cardId: string) => {
@@ -97,7 +101,17 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
   return (
     <div>
       <div>
-        <Button onClick={handleCreateCard}>Добавить карту</Button>
+        <Button
+          onClick={() => {
+            handleCreateCard();
+
+            setTimeout(() => {
+              getData();
+            }, 300);
+          }}
+        >
+          Добавить карту
+        </Button>
       </div>
       {cards.length > 0 && <Divider />}
       <div>
@@ -132,7 +146,10 @@ export const AccountCard: React.FC<{ id: string; cards: any }> = ({
             <Button
               onClick={async () => {
                 await handleDeleteCard(card.id);
-                window.location.reload();
+
+                setTimeout(() => {
+                  getData();
+                }, 300);
               }}
             >
               Удалить карту
